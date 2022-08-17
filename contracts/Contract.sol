@@ -220,7 +220,7 @@ library SafeMath {
 
 
 /* CONTRACT */
-contract Ricardo{
+contract Contract{
 using SafeMath for uint256;
 /* VARIABLES */
 string private _symbol;
@@ -232,8 +232,8 @@ mapping(address => uint256) private _balanceOf;
 mapping(address => mapping(address => uint256)) private _allowance;
 /* CONSTRUCTOR */
 constructor(){
-    _symbol="RIC";
-    _name="Ricardo";
+    _symbol="TST";
+    _name="Teste";
     _decimals=0;
     _totalSupply=1000000;
     _admin=msg.sender;
@@ -286,9 +286,9 @@ function transferFrom(address _from, address _to, uint256 _value) public returns
 /* CHECK IF HE WAS ENOUGH TOKENS */
 require(_balanceOf[_from] >= _value);
 /* CHECK IF THE ALLOWANCE IS ENOUGHT */
-require(_allowance[_from][_to]>=_value);
+require(_allowance[_from][msg.sender]>=_value);
 /* ESTABLISH THE NEW ALLOWANCE BALANCE */
-_allowance[_from][_to]=_allowance[_from][_to].sub(_value);
+_allowance[_from][msg.sender]=_allowance[_from][msg.sender].sub(_value);
 /* MAKE THE TRANSFER */
 _balanceOf[_from]=_balanceOf[_from].sub(_value);
 _balanceOf[_to]=_balanceOf[_to].add(_value);
